@@ -5,7 +5,7 @@ const Form= () => {
 const [userName, setuserName] = useState("");
 const [email, setEmail] = useState("");
 const [name, setName] = useState('');
-const [Daysofavailabity, setDaysAvail] = useState('')
+const [Daysofavailabity, setDaysAvail] = useState('');
 const handleChange =(e)=>{
 	if(e.target.value.length===100){
 	window.alert("Maximum characters allowed is only 100")
@@ -14,11 +14,11 @@ const handleChange =(e)=>{
   setEmail(e.target.value);
 }
 
-const onChange= (e)=>
+const handleDaysofAvailabilityChange= (e)=>
 {
-  const re= /^[0-9\b]+$/;
-  if (e.target.value === '' || re.test(e.target.value)){
-    setDaysAvail.setState({value: e.target.value})
+  const data_input = /^[+-]?\d*(?:[.,]\d*)?$/;
+  if (data_input.test(e.target.value)){
+    setDaysAvail.setState({Daysofavailabity: e.target.value});
   }
 }
 
@@ -38,7 +38,7 @@ return (
 				onChange={ handleChange}
 			/>
     <label>
-      {"\n"}Please enter email:
+      Please enter email:
       <input
         name="email"
         value={email}
@@ -52,9 +52,13 @@ return (
     <label>
          {"\n"}Enter the days for availability
         <input
+          type="text"
+          id="availableDays"
+          pattern="[+-]?\d+(?:[.,]\d+)?"
           name="Days of availability"
+          placeholder='Enter days of availability'
           value={Daysofavailabity}
-          onChange={onChange}
+          onChange={handleDaysofAvailabilityChange}
         />
     </label>
     <form  onSubmit = {handleSubmit}>
