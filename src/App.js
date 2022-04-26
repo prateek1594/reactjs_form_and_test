@@ -1,21 +1,24 @@
 import React,{useState} from 'react';
+import { Checkbox } from 'evergreen-ui';
 
 const Form= () => {
 const [userName, setuserName] = useState("");
-const [value, setValue] = useState('unchecked');
+const [email, setEmail] = useState("");
 const [name, setName] = useState('');
+const [Daysofavailabity, setDaysAvail] = useState('')
 const handleChange =(e)=>{
 	if(e.target.value.length===100){
 	window.alert("Maximum characters allowed is only 100")
 	}
 	setuserName(e.target.value);
+  setEmail(e.target.value);
 }
 
-onChange(e)
+const onChange= (e)=>
 {
   const re= /^[0-9\b]+$/;
   if (e.target.value === '' || re.test(e.target.value)){
-    this.setState({value: e.target.value})
+    setDaysAvail.setState({value: e.target.value})
   }
 }
 
@@ -34,26 +37,30 @@ return (
 				value={userName}
 				onChange={ handleChange}
 			/>
-      <label>
-        Please check the box if required
-      </label>
-      <Checkbox 
-      checked={value}
-      onChange={setValue}
-      />
-      <label>
-        Enter the days for availability
-      </label>
+    <label>
+      {"\n"}Please enter email:
       <input
-        name="Enter days"
-        value={this.state.value}
-        onChange={this.onChange}
+        name="email"
+        value={email}
+        onChange={ handleChange}
       />
-      <form onSubmit = {handleSubmit}>
+    </label>
+    <Checkbox onChange={ () => {
+        alert("You Checked the box, please fill in the days for availability")
+      }} label="Please check only if you have days confirmed"
+      />
+    <label>
+         {"\n"}Enter the days for availability
+        <input
+          name="Days of availability"
+          value={Daysofavailabity}
+          onChange={onChange}
+        />
+    </label>
+    <form  onSubmit = {handleSubmit}>
             <input onChange = {(e) => setName(e.target.value)} value = {name}></input>
-            <button type = 'submit'>Click to submit</button>
-        </form>
-    );
+            <button type = 'submit'> {"\n"}Click to submit</button>
+    </form>
 </div>
 )
 }
